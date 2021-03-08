@@ -1,0 +1,7 @@
+{
+  "name": "pedometer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
