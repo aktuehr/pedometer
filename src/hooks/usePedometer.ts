@@ -1,21 +1,27 @@
-import { IPedometerData, Pedometer } from '@ionic-native/pedometer';
+import { Pedometer } from '@ionic-native/pedometer';
 import { useEffect, useState } from 'react';
+
+const getStepsOfToday = async () => {
+  const options = {
+    "startDate": new Date(new Date().setHours(0, 0, 0, 0)),
+    "endDate": new Date(new Date().setHours(23, 59, 59, 999))
+  };
+  return await Pedometer.queryData(options);
+}
 
 export const usePedometer = () => {
   const [numberOfSteps, setNumberOfSteps] = useState(0);
   useEffect(() => {
-    const onSuccessUpdate = (pedometerData: IPedometerData) => {
-      console.log('onSuccessUpdate');
-      console.log(pedometerData);
-      setNumberOfSteps(pedometerData.numberOfSteps);
-      // pedometerData.startDate; -> ms since 1970
-      // pedometerData.endDate; -> ms since 1970
-      // pedometerData.numberOfSteps;
-      // pedometerData.distance;
-      // pedometerData.floorsAscended;
-      // pedometerData.floorsDescended;
+    const updateStepsOfToday = async () => {
+      const stepsOfToday = await (await getStepsOfToday()).numberOfSteps;
+      setNumberOfSteps(stepsOfToday);
     }
-    Pedometer.startPedometerUpdates().subscribe(onSuccessUpdate)
-  });
+
+    if (numberOfSteps === 0) {
+      updateStepsOfToday();
+    }
+    Pedometer.startPedometerUpdates().subscribe(updateStepsOfToday)
+    
+  }, [numberOfSteps]);
   return { numberOfSteps };
 }
