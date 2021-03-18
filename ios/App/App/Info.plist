@@ -31,6 +31,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -40,6 +42,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>To Take Photos and Video</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>pedometerは歩数データを使用します2</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Always allow Geolocation?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
